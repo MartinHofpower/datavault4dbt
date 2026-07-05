@@ -2,6 +2,8 @@
 
 {%- set end_of_all_times = datavault4dbt.end_of_all_times() -%}
 {%- set timestamp_format = datavault4dbt.timestamp_format() -%}
+{%- set clocktick_unit = datavault4dbt.clocktick_unit() -%}
+{%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
 
 {%- set is_current_col_alias = var('datavault4dbt.is_current_col_alias', 'IS_CURRENT') -%}
 {%- set is_current_col_alias = datavault4dbt.escape_column_names(is_current_col_alias) -%}
@@ -43,7 +45,7 @@ end_dated_source AS (
         {%- endif %}
         {{ src_rsrc }},
         {{ src_ldts }},
-        COALESCE(LEAD(DATEADD(MICROSECOND, -1, {{ src_ldts }})) OVER (PARTITION BY {%- for ref_key in ref_keys %} {{ref_key}} {%- if not loop.last %}, {% endif %}{% endfor %} ORDER BY {{ src_ldts }}),{{ datavault4dbt.string_to_timestamp(timestamp_format, end_of_all_times) }}) AS {{ ledts_alias }}
+        COALESCE(LEAD(DATEADD({{ clocktick_unit }}, -{{ clocktick_step_size }}, {{ src_ldts }})) OVER (PARTITION BY {%- for ref_key in ref_keys %} {{ref_key}} {%- if not loop.last %}, {% endif %}{% endfor %} ORDER BY {{ src_ldts }}),{{ datavault4dbt.string_to_timestamp(timestamp_format, end_of_all_times) }}) AS {{ ledts_alias }}
         {%- if source_columns_to_select -%},
         {{ datavault4dbt.print_list(source_columns_to_select) }}
         {%- endif %}

@@ -2,6 +2,8 @@
 
 {%- set end_of_all_times = datavault4dbt.end_of_all_times() -%}
 {%- set timestamp_format = datavault4dbt.timestamp_format() -%}
+{%- set clocktick_unit = datavault4dbt.clocktick_unit() -%}
+{%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
 
 {%- set is_current_col_alias = var('datavault4dbt.is_current_col_alias', 'IS_CURRENT') -%}
 {%- set is_current_col_alias = datavault4dbt.escape_column_names(is_current_col_alias) -%}
@@ -51,7 +53,7 @@ end_dated_loads AS (
     {{ hashkey }},
     {{ src_ldts }},
     COALESCE(
-        DATEADD(MICROSECOND, -1, LEAD({{ src_ldts }}) OVER (PARTITION BY {{ hashkey }} ORDER BY {{ src_ldts }})),
+        DATEADD({{ clocktick_unit }}, -{{ clocktick_step_size }}, LEAD({{ src_ldts }}) OVER (PARTITION BY {{ hashkey }} ORDER BY {{ src_ldts }})),
         CAST('{{ end_of_all_times }}' AS DATETIME2(6))
     ) AS {{ ledts_alias }}
 FROM distinct_hk_ldts
