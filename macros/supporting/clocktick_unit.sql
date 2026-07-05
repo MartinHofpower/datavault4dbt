@@ -17,12 +17,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (bigquery) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -42,12 +42,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (snowflake) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -67,12 +67,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (exasol) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MILLISECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MILLISECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -92,12 +92,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (synapse) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "NANOSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}        
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "NANOSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -117,12 +117,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (postgres) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -142,12 +142,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (redshift) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -192,12 +192,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (Oracle) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -217,12 +217,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (databricks) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MICROSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "MICROSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}
@@ -242,13 +242,13 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (trino) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MILLISECOND" -%}
     {%- endif -%}
 {%- else -%}
     {%- if global_var is not none -%}
         {%- set clocktick_unit = global_var -%}
     {%- else -%}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "MILLISECOND" -%}
     {%- endif -%}
 {%- endif -%}
 
@@ -268,12 +268,12 @@
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (sqlserver) as a key. Applying the default value.") -%}
         {% endif %}
-        {%- set clocktick_unit = "SECONDS" -%}
+        {%- set clocktick_unit = "NANOSECOND" -%}
     {% endif %}
 {%- elif global_var is not mapping and datavault4dbt.is_something(global_var) -%}
     {%- set clocktick_unit = global_var -%}
 {%- else -%}
-    {%- set clocktick_unit = "SECONDS" -%}
+    {%- set clocktick_unit = "NANOSECOND" -%}
 {%- endif -%}
 
 {{ return(clocktick_unit) }}

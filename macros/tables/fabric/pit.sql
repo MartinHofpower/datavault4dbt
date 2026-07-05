@@ -6,8 +6,6 @@
 {%- set hash_alg = hash_default_values['hash_alg'] -%}
 {%- set unknown_key = hash_default_values['unknown_key'] -%}
 {%- set error_key = hash_default_values['error_key'] -%}
-{%- set clocktick_unit = datavault4dbt.clocktick_unit() -%}
-{%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
 
 {%- set rsrc = var('datavault4dbt.rsrc_alias', 'rsrc') -%}
 {%- set rsrc = datavault4dbt.escape_column_names(rsrc) -%}
@@ -89,7 +87,7 @@ pit_records AS (
             SELECT
                 {{ hashkey }},
                 {{ ldts }},
-                COALESCE(LEAD(DATEADD({{ clocktick_unit }}, -{{ clocktick_step_size }}, {{ ldts }})) OVER (PARTITION BY {{ hashkey }} ORDER BY {{ ldts }}),{{ datavault4dbt.string_to_timestamp(timestamp_format, end_of_all_times) }}) AS {{ ledts }}
+                COALESCE(LEAD({{ datavault4dbt.subtract_clocktick(ldts) }}) OVER (PARTITION BY {{ hashkey }} ORDER BY {{ ldts }}),{{ datavault4dbt.string_to_timestamp(timestamp_format, end_of_all_times) }}) AS {{ ledts }}
             FROM {{ ref(satellite) }}
         ) {{ satellite }}
         {% endif %}
