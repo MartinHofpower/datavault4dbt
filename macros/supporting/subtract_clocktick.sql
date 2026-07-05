@@ -52,8 +52,8 @@ ADD_DAYS({{ timestamp_expression }}, -{{ clocktick_step_size }})
 {%- macro synapse__subtract_clocktick(timestamp_expression) -%}
 
 {%- set clocktick_unit = datavault4dbt.clocktick_unit() | upper -%}
-{%- if clocktick_unit == 'NANOSECOND' -%}
-    {%- set clocktick_step_size = max(var('datavault4dbt.clocktick_step_size', '1'), 100) -%}
+{%- if clocktick_unit == 'NANOSECOND' and var('datavault4dbt.clocktick_step_size', '1')|int < 100 -%}
+    {%- set clocktick_step_size = 100 -%}
 {%- else -%}
     {%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
 {%- endif -%}
@@ -86,7 +86,11 @@ DATEADD({{ clocktick_unit }}, -{{ clocktick_step_size }}, {{ timestamp_expressio
 {%- macro fabric__subtract_clocktick(timestamp_expression) -%}
 
 {%- set clocktick_unit = datavault4dbt.clocktick_unit() | upper -%}
-{%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
+{%- if clocktick_unit == 'NANOSECOND' and var('datavault4dbt.clocktick_step_size', '1')|int < 1000 -%}
+    {%- set clocktick_step_size = 1000 -%}
+{%- else -%}
+    {%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
+{%- endif -%}
 
 DATEADD({{ clocktick_unit }}, -{{ clocktick_step_size }}, {{ timestamp_expression }})
 
@@ -134,8 +138,8 @@ date_add('{{ clocktick_unit }}', -{{ clocktick_step_size }}, {{ timestamp_expres
 {%- macro sqlserver__subtract_clocktick(timestamp_expression) -%}
 
 {%- set clocktick_unit = datavault4dbt.clocktick_unit() | upper -%}
-{%- if clocktick_unit == 'NANOSECOND' -%}
-    {%- set clocktick_step_size = max(var('datavault4dbt.clocktick_step_size', '1'), 100) -%}
+{%- if clocktick_unit == 'NANOSECOND' and var('datavault4dbt.clocktick_step_size', '1')|int < 100 -%}
+    {%- set clocktick_step_size = 100 -%}
 {%- else -%}
     {%- set clocktick_step_size = var('datavault4dbt.clocktick_step_size', '1') -%}
 {%- endif -%}
