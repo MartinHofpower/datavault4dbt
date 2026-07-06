@@ -245,7 +245,7 @@
         {%- set clocktick_unit = "MILLISECOND" -%}
     {%- endif -%}
 {%- else -%}
-    {%- if global_var is not none -%}
+    {%- if datavault4dbt.is_something(global_var) -%}
         {%- set clocktick_unit = global_var -%}
     {%- else -%}
         {%- set clocktick_unit = "MILLISECOND" -%}
