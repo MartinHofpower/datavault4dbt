@@ -11,8 +11,8 @@
 {%- set clocktick_unit = '' -%}
 
 {%- if global_var is mapping -%}
-    {%- if 'bigquery' in global_var.keys()|map('lower') -%}
-        {% set clocktick_unit = global_var['bigquery'] %}
+    {%- if global_var.get('bigquery') is not none -%}
+        {% set clocktick_unit = global_var.get('bigquery') %}
     {%- else -%}
         {%- if execute -%}
             {%- do exceptions.warn("Warning: You have set the global variable 'datavault4dbt.clocktick_unit' to a dictionary, but have not included the adapter you use (bigquery) as a key. Applying the default value.") -%}
